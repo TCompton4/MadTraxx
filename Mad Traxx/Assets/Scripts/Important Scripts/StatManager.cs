@@ -92,11 +92,7 @@ public class StatManager : MonoBehaviour {
 		mainTurret = this.gameObject.transform.parent.GetComponent<MainTurret>();
 		myManager = GameObject.FindObjectOfType<Game_Manager>().GetComponent<Game_Manager>();
 //		cancelButton = GameObject.FindGameObjectWithTag ("Cancel");
-//		myCancel = cancelButton.GetComponent<CancelButton>();
-//		speedButton = GameObject.FindGameObjectWithTag ("SpeedUp").GetComponent<Button>();
-//		rangeButton = GameObject.FindGameObjectWithTag ("RangeUp").GetComponent<Button>();
-//		damageButton = GameObject.FindGameObjectWithTag ("DamageUp").GetComponent<Button>();
-//		fireButton = GameObject.FindGameObjectWithTag ("FireUp").GetComponent<Button>();
+		myCancel = cancelButton.GetComponent<CancelButton>();
 		sButton = GameObject.FindGameObjectWithTag ("SpeedUp");
 		rButton = GameObject.FindGameObjectWithTag ("RangeUp");
 		dButton = GameObject.FindGameObjectWithTag ("DamageUp");
@@ -139,8 +135,8 @@ public class StatManager : MonoBehaviour {
 			mainTurret.SpeedUp (stat [0].valueFour);
 			myManager.MinusOil(300);
 			isUpgradable = false;
-			myCancel.StopCover();
-		}
+            myCancel.UpdateFalse();
+        }
 	}
 
 	//Checks for current level to adjust stat
@@ -171,8 +167,8 @@ public class StatManager : MonoBehaviour {
 			mainTurret.RangeUp (stat [1].valueFour);
 			myManager.MinusOil(180);
 			isUpgradable = false;
-			myCancel.StopCover();
-		}
+            myCancel.UpdateFalse();
+        }
 	}
 
 	//Checks for current level to adjust stat
@@ -203,7 +199,7 @@ public class StatManager : MonoBehaviour {
 			mainTurret.DamageUp (stat [2].valueFour);
 			myManager.MinusOil(240);
 			isUpgradable = false;
-			myCancel.StopCover();
+			myCancel.UpdateFalse();
 		}
 	}
 
@@ -235,8 +231,8 @@ public class StatManager : MonoBehaviour {
 			mainTurret.FireUp (stat [3].valueFour);
 			myManager.MinusOil(190);
 			isUpgradable = false;
-			myCancel.StopCover();
-		}
+            myCancel.UpdateFalse();
+        }
 
 	}
 

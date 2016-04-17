@@ -24,10 +24,10 @@ public class NavAgent : MonoBehaviour {
 	
 		agent.SetDestination (playerBase.position);
 
-		if (agent.speed > 4) 
-		{
-			childCar.GetComponent<SpriteRenderer>().color = Color.red;
-		}
+		//if (agent.speed > 4) 
+		//{
+			//childCar.GetComponent<SpriteRenderer>().color = Color.red;
+		//}
 
 	}
 }

@@ -4,11 +4,6 @@ using UnityEngine.UI;
 
 public class CancelButton : MonoBehaviour {
 
-	BarDownCheck barDown;
-
-	[SerializeField] GameObject cancelText;
-	[SerializeField] GameObject downCheck;
-	//[SerializeField] GameObject thisButton;
 	[SerializeField] GameObject spawnSpot;
 
 	[SerializeField] GameObject weaponSelect;
@@ -17,9 +12,14 @@ public class CancelButton : MonoBehaviour {
 	[SerializeField] Animation weaponBar;
 	[SerializeField] Animation upgradeBar;
 
+    [SerializeField]
+    private bool weaponUp;
+
+    [SerializeField]
+    private bool updateUp;
+
 	void Awake()
 	{
-		barDown = GameObject.FindGameObjectWithTag("DownCheck").GetComponent<BarDownCheck>();
 		weaponSelect = GameObject.FindGameObjectWithTag ("WeaponSelect");
 		upgradeSelect = GameObject.FindGameObjectWithTag ("UpgradeSelect");
 		weaponBar = weaponSelect.GetComponent<Animation>();
@@ -29,27 +29,57 @@ public class CancelButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-
+        weaponUp = false;
+        updateUp = false;
 	}
 
 	void Update()
 	{
 		spawnSpot = GameObject.FindGameObjectWithTag ("SpawnHere");
+
+        if ((weaponUp == false) && (updateUp == false))
+        {
+            this.gameObject.SetActive(false);
+        }
 	}
 
 	public void StopCover()
 	{
-		if (barDown.WeaponDown () == false) 
-		{
-			weaponBar.Play("WeaponBarDown");
-			Destroy(spawnSpot);
-			this.gameObject.SetActive(false);
-		}
+        if (weaponUp == true)
+        {
+            weaponBar.Play("WeaponBarDown");
+            Destroy(spawnSpot);
+            this.gameObject.SetActive(false);
+            weaponUp = false;
+        }
 
-		if (barDown.UpgradeDown () == false) 
-		{
-			upgradeBar.Play("UpgradeBarDown");
-			this.gameObject.SetActive(false);
-		}
+        if (updateUp == true)
+        {
+            upgradeBar.Play("UpgradeBarDown");
+            this.gameObject.SetActive(false);
+            updateUp = false;
+        }
 	}
+
+    public void WeaponTrue()
+    {
+        weaponUp = true;
+        this.gameObject.SetActive(true);
+    }
+
+    public void UpdateTrue()
+    {
+        updateUp = true;
+        this.gameObject.SetActive(true);
+    }
+
+    public void WeaponFalse()
+    {
+        weaponUp = false;
+    }
+
+    public void UpdateFalse()
+    {
+        updateUp = false;
+    }
 }

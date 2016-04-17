@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class UpgradeHandler : MonoBehaviour {
 
+    CancelButton cancelButton;
+
 	[SerializeField] GameObject upgradeSelect;
 	[SerializeField] Animation upgradeBar;
-
-	[SerializeField] GameObject cancelButton;
 
 	[SerializeField] GameObject myUpdater;
 
@@ -17,7 +17,8 @@ public class UpgradeHandler : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		upgradeSelect = GameObject.FindGameObjectWithTag ("UpgradeSelect");
+        cancelButton = GameObject.FindGameObjectWithTag("Cancel").GetComponent<CancelButton>();
+        upgradeSelect = GameObject.FindGameObjectWithTag ("UpgradeSelect");
 		upgradeBar = upgradeSelect.GetComponent<Animation>();
 	}
 	
@@ -44,7 +45,7 @@ public class UpgradeHandler : MonoBehaviour {
 			weapon.GetComponent<StatManager>().UpdateRange();
 			DoneUpdating();
 		}
-	}
+    }
 
 	public void UpgradeDamage ()
 	{
@@ -53,7 +54,7 @@ public class UpgradeHandler : MonoBehaviour {
 			weapon.GetComponent<StatManager>().UpdateDamage();
 			DoneUpdating();
 		}
-	}
+    }
 
 	public void UpgradeFireRate ()
 	{
@@ -62,14 +63,14 @@ public class UpgradeHandler : MonoBehaviour {
 			weapon.GetComponent<StatManager>().UpdateFireRate();
 			DoneUpdating();
 		}
-	}
+    }
 	#endregion
 
 	public void DoneUpdating()
 	{
 		upgradeBar.Play("UpgradeBarDown");
-		cancelButton.SetActive (false);
-	}
+        cancelButton.UpdateFalse();
+    }
 
 	public List<GameObject> WeaponsList()
 	{

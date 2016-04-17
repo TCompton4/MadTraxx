@@ -4,6 +4,7 @@ using System.Collections;
 public class CreateWeapon : MonoBehaviour {
 
 	Game_Manager myManager;
+    CancelButton cancelButton;
 
 	[SerializeField] GameObject thisSpot;
 	[SerializeField] GameObject myTurret;
@@ -21,7 +22,8 @@ public class CreateWeapon : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		myManager = GameObject.FindObjectOfType<Game_Manager>().GetComponent<Game_Manager>();
+        cancelButton = GameObject.FindGameObjectWithTag("Cancel").GetComponent<CancelButton>();
+        myManager = GameObject.FindObjectOfType<Game_Manager>().GetComponent<Game_Manager>();
 		currentOil = myManager.LevelOil ();
 		//noTurret = true;
 	}
@@ -41,6 +43,7 @@ public class CreateWeapon : MonoBehaviour {
 		Instantiate (myTurret, thisSpot.transform.position, transform.rotation);
 		myManager.MinusOil (50);
 		weaponBar.Play("WeaponBarDown");
+        cancelButton.WeaponFalse();
 		Destroy (thisSpot);
 	}
 
@@ -50,7 +53,8 @@ public class CreateWeapon : MonoBehaviour {
 		Instantiate (myFlame, thisSpot.transform.position, transform.rotation);
 		myManager.MinusOil (150);
 		weaponBar.Play("WeaponBarDown");
-		Destroy (thisSpot);
+        cancelButton.WeaponFalse();
+        Destroy (thisSpot);
 	}
 
 	public void MakeCannon()
@@ -59,7 +63,8 @@ public class CreateWeapon : MonoBehaviour {
 		Instantiate (myCannon, thisSpot.transform.position, transform.rotation);
 		myManager.MinusOil (300);
 		weaponBar.Play("WeaponBarDown");
-		Destroy (thisSpot);
+        cancelButton.WeaponFalse();
+        Destroy (thisSpot);
 	}
 
 	public void MakeSpikes()
@@ -68,7 +73,8 @@ public class CreateWeapon : MonoBehaviour {
 		Instantiate (mySpikes, thisSpot.transform.position, transform.rotation);
 		myManager.MinusOil (500);
 		weaponBar.Play("WeaponBarDown");
-		Destroy (thisSpot);
+        cancelButton.WeaponFalse();
+        Destroy (thisSpot);
 	}
 
 	#endregion

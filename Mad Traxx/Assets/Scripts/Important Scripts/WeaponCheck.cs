@@ -5,21 +5,18 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class WeaponCheck : MonoBehaviour {
-	
+
+    CancelButton cancelButton;
+
 	UpgradeHandler upHandler;
-	CancelButton myCancel;
 
 	[SerializeField] private bool hasWeapon;
-//	[SerializeField] bool wsUp;
-//	[SerializeField] bool ugUp;
 
 	[SerializeField] GameObject grabStats;
 
 	//WeaponCheck checkHere;
 	
 	[SerializeField] Button sellWeapon;
-	
-	[SerializeField] GameObject cancelButton;
 	
 	[SerializeField] GameObject spawnerSpot;
 	
@@ -36,10 +33,9 @@ public class WeaponCheck : MonoBehaviour {
 	// Use this for initialization
 	void Awake () 
 	{
+        cancelButton = GameObject.FindGameObjectWithTag("Cancel").GetComponent<CancelButton>();
 		upHandler = GameObject.FindGameObjectWithTag("UIHandler").GetComponent<UpgradeHandler>();
 		hasWeapon = false;
-		cancelButton = GameObject.FindGameObjectWithTag ("Cancel");
-		myCancel = cancelButton.GetComponent<CancelButton>();
 		weaponSelect = GameObject.FindGameObjectWithTag ("WeaponSelect");
 		upgradeSelect = GameObject.FindGameObjectWithTag ("UpgradeSelect");
 		weaponBar = weaponSelect.GetComponent<Animation>();
@@ -79,31 +75,19 @@ public class WeaponCheck : MonoBehaviour {
 		if (hasWeapon == false) 
 		{
 			weaponBar.Play("WeaponBarUp");
-//			wsUp = true;
+            cancelButton.WeaponTrue();
 			Instantiate(spawnerSpot, this.gameObject.transform.position, this.gameObject.transform.rotation);
-			cancelButton.SetActive(true);
 			wasSelected = true;
 		}
-
-//		if (hasWeapon == false && wasSelected == true) 
-//		{
-//			myCancel.StopCover();
-//			wasSelected = false;
-//		}
 		
 		if (hasWeapon == true) 
 		{
 			upgradeBar.Play("UpgradeBarUp");
-//			ugUp = true;
-			grabStats.GetComponent<StatManager>().CanUpgrade(true);
-			cancelButton.SetActive(true);
+            cancelButton.UpdateTrue();
+            grabStats.GetComponent<StatManager>().CanUpgrade(true);
 			Debug.Log(upHandler.WeaponsList().Count);
 		}
 	}
 
-	public void ActivateCancel()
-	{
-		cancelButton.SetActive(true);
-	}
 
 }
