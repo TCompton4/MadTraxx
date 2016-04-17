@@ -28,19 +28,8 @@ public class MainTurret : MonoBehaviour {
 	[SerializeField] private bool enemyEntered;
 	[SerializeField] int numEnemies;
 
-    public enum TurretTypes //An enum used list all possible turret types
-    {
-        BASIC,
-        FLAME,
-        CANNON,
-        SPIKE,
-
-        NUM_TYPES
-    };
-    [SerializeField] private TurretTypes thisTurretType;  //A value used to select and identify this specific type of turret
-
-    // Use this for initialization
-    void Start () 
+	// Use this for initialization
+	void Start () 
 	{
 		thisGun = this.gameObject.transform.GetChild (1).gameObject.transform;
 		theBarrel = this.gameObject.transform.GetChild (2).gameObject;
@@ -50,9 +39,9 @@ public class MainTurret : MonoBehaviour {
 		hitDamage = 6f;
 		myRadius = 4f;
 	}
-
-    // Update is called once per frame
-    void Update () 
+	
+	// Update is called once per frame
+	void Update () 
 	{
 		thisGun = theGun.transform;
 		barrelPos = theBarrel.transform;
