@@ -50,7 +50,7 @@ public class WeaponCheck : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Turret") 
+		if (other.tag == "Turret" || other.tag == "Flame") 
 		{
 			grabStats = other.gameObject.transform.parent.gameObject;
 			upHandler.WeaponsList ().Add (grabStats);
@@ -85,7 +85,8 @@ public class WeaponCheck : MonoBehaviour {
 			upgradeBar.Play("UpgradeBarUp");
             cancelButton.UpdateTrue();
             grabStats.GetComponent<StatManager>().CanUpgrade(true);
-			Debug.Log(upHandler.WeaponsList().Count);
+            grabStats.GetComponent<StatManager>().UpdateUI();
+            Debug.Log(upHandler.WeaponsList().Count);
 		}
 	}
 

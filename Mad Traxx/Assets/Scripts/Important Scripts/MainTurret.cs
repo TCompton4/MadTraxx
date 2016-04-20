@@ -99,13 +99,9 @@ public class MainTurret : MonoBehaviour {
 				Instantiate(turretShot, barrelPos.position, barrelPos.rotation);
 				fireRate = 0.3f;
 			}
-//			transform.LookAt (theEnemy);
 			FollowEnemy();
 		}
 
-//		if (tAndHealth.IsDead () == true) {
-//			tAndHealth.RemoveMe();
-//		}
 		
 		LockRotation ();
 	}
@@ -117,18 +113,6 @@ public class MainTurret : MonoBehaviour {
 			myTargets.Add(other.gameObject);
 		}
 	}
-
-//	void OnTriggerStay(Collider other)
-//	{
-//		foreach (GameObject enemy in myTargets) 
-//		{
-//			tAndHealth = enemy.GetComponent<TargetAndHealth>();
-//			if(tAndHealth.IsDead() == true)
-//			{
-//				tAndHealth.RemoveMe();
-//			}
-//		}
-//	}
 	
 	void OnTriggerExit(Collider other)
 	{

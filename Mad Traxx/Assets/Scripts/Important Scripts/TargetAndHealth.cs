@@ -9,7 +9,11 @@ public class TargetAndHealth : MonoBehaviour {
 	[SerializeField] GameObject thisCar;
 
 	[SerializeField] float carHealth;
-	//[SerializeField] float currentOil;
+    //[SerializeField] float currentOil;
+    [SerializeField]
+    int oilMin;
+    [SerializeField]
+    int oilMax;
 	[SerializeField] bool isDead;
 	[SerializeField] bool inRange;
 
@@ -30,7 +34,8 @@ public class TargetAndHealth : MonoBehaviour {
 		if (carHealth <= 0) 
 		{
 			RemoveMe();
-			myManager.PlusOil(Random.Range(15, 25));
+			myManager.PlusOil(Random.Range(oilMin, oilMax));
+            myManager.MinusEnemy();
 			isDead = true;
 		}
 
