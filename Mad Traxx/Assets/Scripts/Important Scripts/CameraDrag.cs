@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Camera bounds assistance:
+	robertbu (username). http://answers.unity3d.com/questions/501893/calculating-2d-camera-bounds.html
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class CameraDrag : MonoBehaviour {
@@ -9,15 +14,35 @@ public class CameraDrag : MonoBehaviour {
 	private Transform camTransform;
 	private Camera myCam;
 
-	// Use this for initialization
-	void Start () 
+
+
+    [SerializeField] float mapX = 100.0f;
+    [SerializeField] float mapZ = 100.0f;
+
+    private float minX;
+    private float maxX;
+    private float minZ;
+    private float maxZ;
+
+    // Use this for initialization
+    void Start () 
 	{
 		//camTransform = transform;
 		myCam = Camera.main;
-	}
-	
-	// Update is called once per frame
-	void Update () 
+
+
+        float vertExtent = Camera.main.orthographicSize;
+        float horzExtent = vertExtent * Screen.width / Screen.height;
+
+        // Calculations assume map is position at the origin
+        minX = horzExtent - mapX / 2.0f;
+        maxX = mapX / 2.0f - horzExtent;
+        minZ = vertExtent - mapZ / 2.0f;
+        maxZ = mapZ / 2.0f - vertExtent;
+    }
+
+    // Update is called once per frame
+    void Update () 
 	{
 		Touch[] touches = Input.touches;
 
@@ -34,5 +59,13 @@ public class CameraDrag : MonoBehaviour {
 			}
 		}
 	}
+
+    void LateUpdate()
+    {
+        Vector3 v3 = transform.position;
+        v3.x = Mathf.Clamp(v3.x, minX, maxX);
+        v3.z = Mathf.Clamp(v3.z, minZ, maxZ);
+        transform.position = v3;
+    }
 }
 
